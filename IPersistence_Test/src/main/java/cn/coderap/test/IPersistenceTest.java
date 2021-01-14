@@ -1,5 +1,6 @@
 package cn.coderap.test;
 
+import cn.coderap.dao.IUserDao;
 import cn.coderap.io.Resources;
 import cn.coderap.pojo.User;
 import cn.coderap.sqlSession.SqlSession;
@@ -28,7 +29,13 @@ public class IPersistenceTest {
         user.setAge(23);
 //        user = (User)sqlSession.selectOne("user.selectOne", user);
 //        System.out.println(user);
-        List<User> users = sqlSession.selectList("user.selectList");
+//        List<User> users = sqlSession.selectList("user.selectList");
+//        System.out.println(users);
+
+        IUserDao userDao = (IUserDao) sqlSession.getMapper(IUserDao.class); //userDao即为IUserDao接口的代理实现类对象
+        List<User> users= userDao.findAll(); //代理对象去调用IUserDao接口中的任何方法（findAll、findByCondition），都会去执行invoke方法
         System.out.println(users);
+        user = userDao.findByCondition(user);
+        System.out.println(user);
     }
 }
