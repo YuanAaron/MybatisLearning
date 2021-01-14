@@ -1,0 +1,12 @@
+<Mapper namespace="user">
+
+    <!--一条sql的唯一标识：namespace.id，即statementId-->
+    <!--一个select标签封装成一个mappedStatement对象-->
+    <select id="selectList" resultType="cn.coderap.pojo.User">
+        select * from `user`
+    </select>
+
+    <select id="selectOne" resultType="cn.coderap.pojo.User" parameterType="cn.coderap.pojo.User">
+        select * from `user` where name like #{name} and age > #{age}
+    </select>
+</Mapper>
