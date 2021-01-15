@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--配置运行环境-->
+    <environments default="develop">
+        <!--写两个<environment>就可以配置开发和生产两个环境-->
+        <environment id="develop">
+            <!--当前事务交由JDBC进行管理-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--POOLED表示当前使用Mybatis提供的连接池，而UNPOOLED表示不使用连接池，即每次都获取一个新的连接-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="Kexin!00"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--引入映射配置文件-->
+    <mappers>
+        <mapper resource="UserMapper.xml"></mapper>
+    </mappers>
+</configuration>

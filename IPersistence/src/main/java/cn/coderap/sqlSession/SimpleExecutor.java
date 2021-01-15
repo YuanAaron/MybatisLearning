@@ -74,7 +74,7 @@ public class SimpleExecutor implements Executor{
                 //通过反射或内省，根据数据库表和实体的对应关系完成封装
                 PropertyDescriptor propertyDescriptor = new PropertyDescriptor(columnName, resultTypeClass);
                 Method writeMethod = propertyDescriptor.getWriteMethod();
-                writeMethod.invoke(o,value);
+                writeMethod.invoke(o,value); //这里的赋值能够实现的基础是实体中的属性名和数据库表中的字段名一致
             }
             objects.add(o);
         }
