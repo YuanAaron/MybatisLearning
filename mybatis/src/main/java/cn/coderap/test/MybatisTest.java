@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,6 +77,33 @@ public class MybatisTest {
         SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
         IUserDao mapper = sqlSession.getMapper(IUserDao.class);
         List<User> all = mapper.findAll();
+        System.out.println(all);
+    }
+
+    @Test
+    public void test6() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
+        SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
+        IUserDao mapper = sqlSession.getMapper(IUserDao.class);
+
+        User user = new User();
+        user.setName("%san");
+        user.setAge(23);
+        List<User> all = mapper.findByCondition(user);
+        System.out.println(all);
+    }
+
+    @Test
+    public void test7() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
+        SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
+        IUserDao mapper = sqlSession.getMapper(IUserDao.class);
+
+        Integer[] ids = {1,2};
+        //List<User> all = mapper.findByIds(ids);
+        List<User> all = mapper.findByIds(Arrays.asList(ids));
         System.out.println(all);
     }
 }

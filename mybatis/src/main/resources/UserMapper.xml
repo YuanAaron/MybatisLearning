@@ -6,9 +6,39 @@
 <mapper namespace="cn.coderap.dao.IUserDao">
     <!--namespace与id一起组成sql的唯一标识-->
 
+    <!--sql片段抽取-->
+    <sql id="baseSql">
+        select * from `user`
+    </sql>
+
     <!--查询用户-->
     <select id="findAll" resultType="user">
-        select * from `user`
+        <include refid="baseSql"/>
+    </select>
+
+    <!--多条件组合查询-->
+    <select id="findByCondition" parameterType="user" resultType="user">
+        <include refid="baseSql"/> <!--where 1=1-->
+        <where>
+            <if test="name != null">
+                and name like #{name}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>
+
+    <!--多值查询-->
+    <!--当参数为数组或集合时，parameterType使用list-->
+    <select id="findByIds" parameterType="list" resultType="user">
+        <include refid="baseSql"/>
+        <where>
+            <!--当参数为数组时使用array，当参数是集合时使用list/collection-->
+            <foreach collection="list" open="id in (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
     </select>
 
     <!--添加用户-->
