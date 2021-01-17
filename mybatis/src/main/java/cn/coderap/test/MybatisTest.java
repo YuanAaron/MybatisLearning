@@ -1,7 +1,6 @@
 package cn.coderap.test;
 
 import cn.coderap.dao.IUserDao;
-import cn.coderap.dao.UserDaoImpl;
 import cn.coderap.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -57,18 +56,26 @@ public class MybatisTest {
 
     @Test
     public void test4() throws IOException {
+        //1、Resources工具类，配置文件的加载，把配置文件加载成字节输入流
         InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        //2、解析了配置文件，并创建了sqlSessionFactory工厂
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
-        SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
+        //3、生产sqlSession(sqlSession中封装了selectList、selectOne等方法)
+        //openSession中默认开启一个事务，但该事务不会自动提交，所以在进行增删改操作时要手动提交事务; 加上true就会自动提交了
+        SqlSession sqlSession = sqlSessionFactory.openSession(true); //用到了工厂模式
+        //4、调用sqlSession中的方法，执行JDBC操作
         sqlSession.delete("user.deleteUser","wangwu");
-        sqlSession.commit(); //增删改需要提交事务
+//        sqlSession.commit(); //增删改需要提交事务
         sqlSession.close();
     }
 
     @Test
-    public void testTraditionDao() throws IOException {
-        IUserDao userDao = new UserDaoImpl();
-        List<User> all = userDao.findAll();
+    public void test5() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
+        SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
+        IUserDao mapper = sqlSession.getMapper(IUserDao.class);
+        List<User> all = mapper.findAll();
         System.out.println(all);
     }
 }
