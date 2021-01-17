@@ -1,5 +1,7 @@
 package cn.coderap.test;
 
+import cn.coderap.dao.IUserDao;
+import cn.coderap.dao.UserDaoImpl;
 import cn.coderap.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -61,5 +63,12 @@ public class MybatisTest {
         sqlSession.delete("user.deleteUser","wangwu");
         sqlSession.commit(); //增删改需要提交事务
         sqlSession.close();
+    }
+
+    @Test
+    public void testTraditionDao() throws IOException {
+        IUserDao userDao = new UserDaoImpl();
+        List<User> all = userDao.findAll();
+        System.out.println(all);
     }
 }
