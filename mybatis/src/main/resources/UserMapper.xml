@@ -7,22 +7,22 @@
     <!--namespace与id一起组成sql的唯一标识-->
 
     <!--查询用户-->
-    <select id="findAll" resultType="cn.coderap.pojo.User">
+    <select id="findAll" resultType="user">
         select * from `user`
     </select>
 
     <!--添加用户-->
-    <insert id="saveUser" parameterType="cn.coderap.pojo.User">
+    <insert id="saveUser" parameterType="user">
         insert into `user` (name,age) values(#{name},#{age})
     </insert>
 
     <!--修改用户-->
-    <update id="updateUser" parameterType="cn.coderap.pojo.User">
+    <update id="updateUser" parameterType="user">
         update `user` set age = #{age} where name = #{name}
     </update>
 
     <!--删除用户-->
-    <delete id="deleteUser" parameterType="java.lang.String">
+    <delete id="deleteUser" parameterType="string">
         delete from `user` where name = #{name}
     </delete>
 </mapper>

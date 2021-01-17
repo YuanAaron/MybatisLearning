@@ -5,6 +5,17 @@
 
 <configuration>
 
+    <!--1、properties：用于加载外部的properties文件-->
+    <properties resource="jdbc.properties"/>
+
+    <!--2、typAliases：为cn.coderap.pojo.User取别名user-->
+    <typeAliases >
+        <!--typeAlias：适用于给单独的实体取别名-->
+        <!--<typeAlias type="cn.coderap.pojo.User" alias="user"></typeAlias>-->
+        <!--package（常用）：用于批量起别名，别名为对应的类名，且别名不区分大小写-->
+        <package name="cn.coderap.pojo"/>
+    </typeAliases>
+
     <!--配置运行环境-->
     <environments default="develop">
         <!--写两个<environment>就可以配置开发和生产两个环境-->
@@ -13,10 +24,10 @@
             <transactionManager type="JDBC"></transactionManager>
             <!--POOLED表示当前使用Mybatis提供的连接池，而UNPOOLED表示不使用连接池，即每次都获取一个新的连接-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql:///mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="Kexin!00"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
