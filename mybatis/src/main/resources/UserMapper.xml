@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="user">
+<mapper namespace="cn.coderap.dao.IUserDao">
     <!--namespace与id一起组成sql的唯一标识-->
 
     <!--查询用户-->
