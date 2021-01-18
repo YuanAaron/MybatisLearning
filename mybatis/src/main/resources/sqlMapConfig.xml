@@ -34,6 +34,9 @@
 
     <!--引入映射配置文件-->
     <mappers>
-        <mapper resource="UserMapper.xml"></mapper>
+        <!--1、mapper方式-->
+        <!--<mapper resource="UserMapper.xml"></mapper>-->
+        <!--2、package方式：使用该种方式要求接口和xml在相同路径下-->
+        <package name="cn.coderap.mapper"/>
     </mappers>
 </configuration>

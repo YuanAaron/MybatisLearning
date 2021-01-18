@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.coderap.mapper.IStuMapper">
+    <resultMap id="oneStuOneClazz" type="cn.coderap.pojo.Stu">
+        <id column="id" property="id"/>
+        <result column="stu_name" property="stuName"/>
+
+        <association property="clazz" javaType="cn.coderap.pojo.Clazz">
+            <!--注意：这里本应该是id,但因为有两个id字段，无法区分应该将哪个封装到该id属性，
+                且这时clazz_id与id相等，所以可以用clazz_id来代替id-->
+            <id column="clazz_id" property="id"/>
+            <result column="clazz_name" property="clazzName"/>
+        </association>
+    </resultMap>
+
+    <!--一对一-->
+    <select id="findStuAndClazz" resultMap="oneStuOneClazz">
+        select * from t_student s, t_clazz c where s.clazz_id = c.id
+    </select>
+</mapper>
