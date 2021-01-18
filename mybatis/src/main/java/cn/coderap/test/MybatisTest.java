@@ -1,6 +1,8 @@
 package cn.coderap.test;
 
 import cn.coderap.dao.IUserDao;
+import cn.coderap.mapper.IClazzMapper;
+import cn.coderap.pojo.Stu;
 import cn.coderap.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -105,5 +107,18 @@ public class MybatisTest {
         //List<User> all = mapper.findByIds(ids);
         List<User> all = mapper.findByIds(Arrays.asList(ids));
         System.out.println(all);
+    }
+
+    @Test
+    public void test8() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
+        SqlSession sqlSession = sqlSessionFactory.openSession(); //用到了工厂模式
+        IClazzMapper mapper = sqlSession.getMapper(IClazzMapper.class);
+        List<Stu> stuList = mapper.findStuAndClazz();
+        for (Stu stu : stuList) {
+            System.out.println(stu);
+        }
+
     }
 }
