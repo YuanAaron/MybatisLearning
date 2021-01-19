@@ -9,15 +9,15 @@
         <result column="stu_name" property="stuName"/>
 
         <association property="clazz" javaType="cn.coderap.pojo.Clazz">
-            <!--注意：这里本应该是id,但因为有两个id字段，无法区分应该将哪个封装到该id属性，
-                且这时clazz_id与id相等，所以可以用clazz_id来代替id-->
-            <id column="clazz_id" property="id"/>
+            <!--注意：这里本应该是id,但因为有两个id字段，无法区分应该将哪个封装到该id属性。
+                这种情况下，可以给一个id取别名来解决-->
+            <id column="cid" property="id"/>
             <result column="clazz_name" property="clazzName"/>
         </association>
     </resultMap>
 
     <!--一对一-->
     <select id="findStuAndClazz" resultMap="oneStuOneClazz">
-        select * from t_student s, t_clazz c where s.clazz_id = c.id
+        select *,c.id as cid from t_student s, t_clazz c where s.clazz_id = c.id
     </select>
 </mapper>
