@@ -10,7 +10,7 @@
 
         <association property="clazz" javaType="cn.coderap.pojo.Clazz">
             <!--注意：这里本应该是id,但因为有两个id字段，无法区分应该将哪个封装到该id属性。
-                这种情况下，可以给一个id取别名来解决-->
+                这种情况下，可以给一个id取别名cid来解决;因为s.clazz_id与c.id相等，因此也可以直接使用clazz_id-->
             <id column="cid" property="id"/>
             <result column="clazz_name" property="clazzName"/>
         </association>
