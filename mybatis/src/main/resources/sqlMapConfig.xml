@@ -34,9 +34,13 @@
 
     <!--引入映射配置文件-->
     <mappers>
-        <!--1、mapper方式-->
+        <!--xml的第一种方式、mapper方式-->
         <!--<mapper resource="UserMapper.xml"></mapper>-->
-        <!--2、package方式：使用该种方式要求接口和xml在相同路径下-->
+        <!--注解的第一种方式、class方式-->
+        <!--<mapper class="cn.coderap.mapper.IPersonMapper"/>-->
+
+        <!--xml的第二种方式、package方式：使用该种方式要求接口和xml在相同路径下-->
+        <!--注解的第二种方式-->
         <package name="cn.coderap.mapper"/>
     </mappers>
 </configuration>
