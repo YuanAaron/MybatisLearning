@@ -16,5 +16,5 @@ public interface IClazzMapper {
 
     //注意：这里必须取别名为className，否则将clazz_name字段的值封装到实体的clazzName属性中
     @Select("select id,clazz_name as clazzName from t_clazz where id = #{id}")
-    public Clazz findUserById(Integer id);
+    public Clazz findClazzById(Integer id);
 }

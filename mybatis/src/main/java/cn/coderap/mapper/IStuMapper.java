@@ -25,7 +25,7 @@ public interface IStuMapper {
             @Result(id = true, column = "id",property = "id"),
             @Result(column = "stu_name",property = "stuName"),
             @Result(column = "clazz_id",property = "clazz", javaType = Clazz.class, one = @One(
-                select = "cn.coderap.mapper.IClazzMapper.findUserById"
+                select = "cn.coderap.mapper.IClazzMapper.findClazzById"
             ))
     })
     public List<Stu> findStuAndClazz1();
