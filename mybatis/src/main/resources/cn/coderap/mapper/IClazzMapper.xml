@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.coderap.mapper.IClazzMapper">
+    <resultMap id="oneClazzMoreStu" type="cn.coderap.pojo.Clazz">
+        <id column="id" property="id"/>
+        <result column="clazz_name" property="clazzName"/>
+        <collection property="stuList" ofType="cn.coderap.pojo.Stu">
+            <id column="sid" property="id"/>
+            <result column="stu_name" property="stuName"/>
+        </collection>
+    </resultMap>
+
+    <!--一对多-->
+    <select id="findAll" resultMap="oneClazzMoreStu">
+        select *, s.id as sid from t_clazz c left join t_student s on c.id = s.clazz_id
+    </select>
+</mapper>
