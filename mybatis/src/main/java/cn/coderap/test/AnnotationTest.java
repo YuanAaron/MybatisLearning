@@ -3,6 +3,7 @@ package cn.coderap.test;
 import cn.coderap.mapper.IClazzMapper;
 import cn.coderap.mapper.IPersonMapper;
 import cn.coderap.mapper.IStuMapper;
+import cn.coderap.pojo.Clazz;
 import cn.coderap.pojo.Person;
 import cn.coderap.pojo.Stu;
 import org.apache.ibatis.io.Resources;
@@ -23,7 +24,8 @@ import java.util.List;
 public class AnnotationTest {
 
     //private IPersonMapper mapper;
-    private IStuMapper mapper;
+    //private IStuMapper mapper;
+    private IClazzMapper mapper;
 
     @Before
     public void before() throws IOException {
@@ -31,7 +33,7 @@ public class AnnotationTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
         SqlSession sqlSession = sqlSessionFactory.openSession(true); //用到了工厂模式
         //mapper = sqlSession.getMapper(IPersonMapper.class);
-        mapper = sqlSession.getMapper(IStuMapper.class);
+        mapper = sqlSession.getMapper(IClazzMapper.class);
     }
 
 //    @Test
@@ -61,11 +63,19 @@ public class AnnotationTest {
 //        mapper.deletePerson(6);
 //    }
 
+//    @Test
+//    public void test5() {
+//        List<Stu> stuList = mapper.findStuAndClazz1();
+//        for (Stu stu : stuList) {
+//            System.out.println(stu);
+//        }
+//    }
+
     @Test
-    public void test5() {
-        List<Stu> stuList = mapper.findStuAndClazz1();
-        for (Stu stu : stuList) {
-            System.out.println(stu);
+    public void test6() {
+        List<Clazz> clazzList = mapper.findAll1();
+        for (Clazz clazz : clazzList) {
+            System.out.println(clazz);
         }
     }
 

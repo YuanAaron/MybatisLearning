@@ -29,4 +29,7 @@ public interface IStuMapper {
             ))
     })
     public List<Stu> findStuAndClazz1();
+
+    @Select("select *,stu_name stuName from t_student s where clazz_id = #{clazz_id}")
+    public List<Stu> findStuByClazzId(Integer clazzId);
 }
