@@ -31,4 +31,16 @@ public interface IPersonMapper {
     //删除
     @Delete("delete from person where id = #{id}")
     public void deletePerson(Integer id);
+
+    //多对多的注解方式：xml中的一个sql分成了两个sql
+    @Select("select * from person")
+    @Results({
+            @Result(id = true,column = "id",property = "id"),
+            @Result(column = "user_name",property = "userName"),
+            @Result(column = "age",property = "age"),
+            @Result(column = "id",property = "roleList",javaType = List.class,many = @Many(
+                select = "cn.coderap.mapper.IRoleMapper.findRoleByPersonId"
+            ))
+    })
+    public List<Person> findAllPersonAndRole1();
 }

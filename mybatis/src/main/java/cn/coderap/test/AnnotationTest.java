@@ -23,17 +23,18 @@ import java.util.List;
  */
 public class AnnotationTest {
 
-    //private IPersonMapper mapper;
+    private IPersonMapper mapper;
     //private IStuMapper mapper;
-    private IClazzMapper mapper;
+    //private IClazzMapper mapper;
 
     @Before
     public void before() throws IOException {
         InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream); //用到了建造者模式
         SqlSession sqlSession = sqlSessionFactory.openSession(true); //用到了工厂模式
-        //mapper = sqlSession.getMapper(IPersonMapper.class);
-        mapper = sqlSession.getMapper(IClazzMapper.class);
+        mapper = sqlSession.getMapper(IPersonMapper.class);
+        //mapper = sqlSession.getMapper(IStuMapper.class);
+        //mapper = sqlSession.getMapper(IClazzMapper.class);
     }
 
 //    @Test
@@ -71,11 +72,19 @@ public class AnnotationTest {
 //        }
 //    }
 
+//    @Test
+//    public void test6() {
+//        List<Clazz> clazzList = mapper.findAll1();
+//        for (Clazz clazz : clazzList) {
+//            System.out.println(clazz);
+//        }
+//    }
+
     @Test
-    public void test6() {
-        List<Clazz> clazzList = mapper.findAll1();
-        for (Clazz clazz : clazzList) {
-            System.out.println(clazz);
+    public void test7() {
+        List<Person> personList = mapper.findAllPersonAndRole1();
+        for (Person person : personList) {
+            System.out.println(person);
         }
     }
 
