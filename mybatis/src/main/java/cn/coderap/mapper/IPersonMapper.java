@@ -43,4 +43,7 @@ public interface IPersonMapper {
             ))
     })
     public List<Person> findAllPersonAndRole1();
+
+    @Select("select * from person where id = #{id}")
+    public Person findPersonById(Integer id);
 }
