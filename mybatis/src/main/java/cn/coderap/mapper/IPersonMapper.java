@@ -10,6 +10,7 @@ import java.util.List;
  * Created by yw
  * 2021/1/19
  */
+@CacheNamespace
 public interface IPersonMapper {
 
     //查询所有用户、同时查询每个用户关联的角色信息

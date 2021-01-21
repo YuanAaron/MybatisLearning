@@ -3,6 +3,7 @@ package cn.coderap.pojo;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class Person {
+public class Person implements Serializable {
     private Integer id;
     private String userName;
     private int age;

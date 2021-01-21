@@ -8,7 +8,12 @@
     <!--1、properties：用于加载外部的properties文件-->
     <properties resource="jdbc.properties"/>
 
-    <!--2、typAliases：为cn.coderap.pojo.User取别名user-->
+    <!--2、开启二级缓存，默认就这样-->
+    <!--<settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>-->
+
+    <!--3、typAliases：为cn.coderap.pojo.User取别名user-->
     <typeAliases >
         <!--typeAlias：适用于给单独的实体取别名-->
         <!--<typeAlias type="cn.coderap.pojo.User" alias="user"></typeAlias>-->
@@ -16,7 +21,7 @@
         <package name="cn.coderap.pojo"/>
     </typeAliases>
 
-    <!--配置运行环境-->
+    <!--4、配置运行环境-->
     <environments default="develop">
         <!--写两个<environment>就可以配置开发和生产两个环境-->
         <environment id="develop">
@@ -32,7 +37,7 @@
         </environment>
     </environments>
 
-    <!--引入映射配置文件-->
+    <!--5、引入映射配置文件-->
     <mappers>
         <!--xml的第一种方式、mapper方式-->
         <!--<mapper resource="UserMapper.xml"></mapper>-->
